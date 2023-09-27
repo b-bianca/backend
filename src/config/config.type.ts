@@ -10,4 +10,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: process.env.POSTGRES_DB || 'hubladb',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
+  "logging": true,
 };
