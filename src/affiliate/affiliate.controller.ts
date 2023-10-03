@@ -1,11 +1,14 @@
 import { Controller, Get,BadRequestException, Query } from '@nestjs/common';
 import { AffiliateService } from './affiliate.service';
-
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+@ApiTags('Affiliate Data')
 @Controller('affiliate')
 export class AffiliateController {
   constructor(private readonly affiliateService: AffiliateService) {}
 
   @Get('/balance')
+  @ApiOperation({ summary: "Returns the final balance of the affiliate." })
+  @ApiResponse({ status: 200, description: "Message with the affiliate's balance." })
   async finalBalance(@Query('seller') seller: string): Promise<string> {
     if (!seller) {
       throw new BadRequestException('Seller parameter is required.');
