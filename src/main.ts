@@ -6,6 +6,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.setGlobalPrefix('api/v1')
+
   const config = new DocumentBuilder()
   .setTitle('Producer Affiliate API')
   .setDescription('This API handles file uploads, normalizes incoming data, and manages the relationships between producers, affiliates, and sales.')
@@ -20,6 +22,6 @@ async function bootstrap() {
     optionsSuccessStatus: 200,
   }));
 
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap();

@@ -3,7 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { UploadDTO } from './dto/upload.dto';
 import { UploadFile } from './entities/upload.entity';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {  ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Upload File')
 @Controller('upload')
@@ -11,7 +11,7 @@ export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
   @Post('/')
-  @ApiOperation({ summary: "Upload a file to the database and retrieve normalized data." })
+  @ApiOperation({ summary: "Upload a file, normalized data and save to the database." })
   @ApiResponse({ status: 201, description: "Data successfully created in the database." })
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file:Express.Multer.File) {
