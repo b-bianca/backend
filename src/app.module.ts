@@ -10,9 +10,9 @@ import { AffiliateModule } from './affiliate/affiliate.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    TypeOrmModule.forRoot(typeOrmConfig),
     UploadModule,
     TransactionsModule,
-    TypeOrmModule.forRoot(typeOrmConfig),
     ProductorModule,
     AffiliateModule,
   ],
