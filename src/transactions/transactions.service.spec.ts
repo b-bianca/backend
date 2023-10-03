@@ -2,8 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsService } from './transactions.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { InternalServerErrorException } from '@nestjs/common';
-//import  UploadFile  from 'src/upload/entities/upload.entity';
-import { UploadFile } from "src/upload/entities/upload.entity"
+import { UploadFile } from "../upload/entities/upload.entity"
 
 describe('TransactionsService', () => {
   let service: TransactionsService;
