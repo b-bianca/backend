@@ -1,5 +1,10 @@
 version: '3.9'
 
+networks:
+  hubla-challenge-network:
+    driver: bridge
+    name: hubla-challenge-network
+
 services:
   db:
     container_name: postgresql
@@ -13,5 +18,25 @@ services:
      - POSTGRES_DB=hubladb
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - hubla-challenge-network
+    healthcheck:
+      test:  ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  productsapi:
+    container_name: hubla-products-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - hubla-challenge-network
+    depends_on:
+      db:
+        condition: service_healthy
 volumes:
   pgdata: {}
