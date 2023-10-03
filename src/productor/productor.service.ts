@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { UploadFile } from 'src/upload/entities/upload.entity';
+import { UploadFile } from '../upload/entities/upload.entity';
 import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 

@@ -1,15 +1,15 @@
-# FROM node:18
+FROM node:18
 
-# WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
-# COPY package*.json ./
+COPY package*.json ./
 
-# RUN npm install
+RUN npm install
 
-# COPY . .
+COPY . .
 
-# RUN npm run build
+RUN npm run build
 
-# EXPOSE 3000
+EXPOSE 3000
 
-# CMD [ "npm", "run" , "start:prod" ]
+CMD [ "npm", "run" , "start:prod" ]
