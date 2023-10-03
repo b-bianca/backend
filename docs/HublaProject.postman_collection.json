@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "10a3752d-4fe2-49f4-bf7d-2c397c24f7cd",
+		"name": "HublaProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13244098",
+		"_collection_link": "https://www.postman.com/lindoesdoback/workspace/challenge/collection/13244098-10a3752d-4fe2-49f4-bf7d-2c397c24f7cd?action=share&source=collection_link&creator=13244098"
+	},
+	"item": [
+		{
+			"name": "Upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/bianc/OneDrive/Documentos/sales.txt"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/upload/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"upload",
+						""
+					]
+				},
+				"description": "Upload a file, normalized data and save to the database."
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/transactions?created_at='2023-10-03'",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "created_at",
+							"value": "'2023-10-03'"
+						}
+					]
+				},
+				"description": "Retrieve all submitted data, or filter data based on a query-param for the date the file was uploaded to the database."
+			},
+			"response": []
+		},
+		{
+			"name": "ProducerBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/productor/?seller=jose carlos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"productor",
+						""
+					],
+					"query": [
+						{
+							"key": "seller",
+							"value": "jose carlos"
+						}
+					]
+				},
+				"description": "Returns the final balance of the producer."
+			},
+			"response": []
+		},
+		{
+			"name": "AffiliateBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/affiliate/?seller=jose carlos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"affiliate",
+						""
+					],
+					"query": [
+						{
+							"key": "seller",
+							"value": "jose carlos"
+						}
+					]
+				},
+				"description": "Returns the final balance of the affiliate."
+			},
+			"response": []
+		}
+	]
+}
