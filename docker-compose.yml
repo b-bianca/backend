@@ -26,7 +26,7 @@ services:
       timeout: 5s
       retries: 5
   
-  productsapi:
+  producer-affiliate-api:
     container_name: hubla-products-api
     build:
       context: .
