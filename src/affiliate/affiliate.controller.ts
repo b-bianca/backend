@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Query } from '@nestjs/common';
+import { Controller, Get,BadRequestException, Query } from '@nestjs/common';
 import { AffiliateService } from './affiliate.service';
 
 @Controller('affiliate')
@@ -10,7 +10,7 @@ export class AffiliateController {
     if (!seller) {
       throw new BadRequestException('Seller parameter is required.');
     }
-     const listTransactions = await this.affiliateService.findRegisterByProducer(seller);
+     const listTransactions = await this.affiliateService.findRegisterByAffiliate(seller);
      let balance = 0
 
      for (const item of listTransactions) {

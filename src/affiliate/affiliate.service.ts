@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Like, Repository } from 'typeorm';
-import { UploadFile } from 'src/upload/entities/upload.entity';
+import { UploadFile } from '../upload/entities/upload.entity';
 
 @Injectable()
 export class AffiliateService {
@@ -10,16 +10,16 @@ export class AffiliateService {
     private affiliateRepository: Repository<UploadFile>,
   ) {}
 
-  async findRegisterByProducer(seller: string): Promise<UploadFile[]> {
+  async findRegisterByAffiliate(seller: string): Promise<UploadFile[]> {
     try {
       const sanitizedSearchTerm = `%${seller}%`;
-      const listByProductor = await this.affiliateRepository.find({where: [
+      const listByAffiliate = await this.affiliateRepository.find({where: [
         { seller: Like(sanitizedSearchTerm) },
         { seller: ILike(sanitizedSearchTerm) }, 
       ], })
-      return listByProductor
+      return listByAffiliate
     } catch (error) {
-      throw new InternalServerErrorException('Failed to retrieve register based on productor.');
+      throw new InternalServerErrorException('Failed to retrieve register based on affiliate.');
     }
   }
 }
