@@ -20,7 +20,6 @@ export class TransactionsService {
 
       const transactions = await query.getMany();
       return transactions;
-  
     } catch (error) {
       throw new InternalServerErrorException('Failed to retrieve transactions.');
     }

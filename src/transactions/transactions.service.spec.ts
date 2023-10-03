@@ -32,7 +32,6 @@ describe('TransactionsService', () => {
 
   describe('findAllTransactions', () => {
     it('should retrieve all transactions successfully', async () => {
-
       const transactionsData: UploadFile[] = [
         {
           "id": 1,

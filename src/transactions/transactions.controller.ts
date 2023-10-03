@@ -21,7 +21,6 @@ export class TransactionsController {
       }
       return result
     }) 
-
     return mappedTransactions
   }
 }
