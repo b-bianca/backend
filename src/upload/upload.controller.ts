@@ -3,7 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { UploadDTO } from './dto/upload.dto';
 import { UploadFile } from './entities/upload.entity';
-import {  ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Upload File')
 @Controller('upload')
