@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { TransactionDTO } from './dto/transaction.dto';
 
@@ -7,8 +7,8 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
   @Get('/')
-  async findAll(): Promise<TransactionDTO[]> {
-    const allTransactions = await this.transactionsService.findAllTransactions();
+  async findAll(@Query('createdAt') createdAt: string): Promise<TransactionDTO[]> {
+    const allTransactions = await this.transactionsService.findAllTransactions(createdAt);
 
     const mappedTransactions = allTransactions.map((transaction) => {
       const result: TransactionDTO = {

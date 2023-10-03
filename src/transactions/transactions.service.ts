@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UploadFile } from '../upload/entities/upload.entity';
@@ -10,10 +10,17 @@ export class TransactionsService {
     private transactionRepository: Repository<UploadFile>,
   ) {}
 
-  async findAllTransactions(): Promise<UploadFile[]> {
+  async findAllTransactions(@Query('createdAt') createdAt: string | null): Promise<UploadFile[]> {
     try {
-      const all = await this.transactionRepository.find(); 
-      return all
+      let query = this.transactionRepository.createQueryBuilder('transaction');
+
+      if (createdAt) {
+        query = query.where('transaction.createdAt = :createdAt', { createdAt });
+      }
+
+      const transactions = await query.getMany();
+      return transactions;
+  
     } catch (error) {
       throw new InternalServerErrorException('Failed to retrieve transactions.');
     }
