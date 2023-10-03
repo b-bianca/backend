@@ -1,73 +1,76 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Hubla Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Sumário
+- [Sobre](#sobre)
+- [Requisitos](#requisitos)
+- [O que esse projeto faz e possui](#o-que-esse-projeto-faz-e-possui)
+- [O que esse projeto não faz e débitos técnicos](#o-que-esse-projeto-não-faz-e-débitos-técnicos)
+- [Como Executar o Projeto](#como-executar-o-projeto)
+  - [Criar Variáveis de Ambiente](#criar-variáveis-de-ambiente)
+  - [Executar o projeto](#como-executar-o-projeto)
+  - [Executar o Docker](#executar-o-docker)
+  - [Utilizar Aplicaçção & Documentação API](#utilizar-aplicação--documentação-api)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Sobre
+Este projeto visa simular uma plataforma que trabalha com o modelo criador-afiliado. É necessário construir uma interface web que possibilite o upload de um arquivo de transações de produtos vendidos, normalizar os dados e armazená-los em um
+banco de dados relacional.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Requisitos
 
-## Installation
+|Recurso|Versão|Obrigatório|Nota|
+|-|-|-|-|
+|Docker Desktop| 4.21 ou mais atual|Sim|Necessário para rodar containers das APIs e banco de dados|
+|Node| 18.18.0|Não|Necessário apenas no caso de rodar localmente sem container|
 
-```bash
-$ npm install
-```
+## O que esse projeto faz e possui
+### O que esse projeto faz
+Através da API é possível fazer o upload de um arquivo. Este arquivo é normalizado e seus dados enviados para o banco de dados.
+Com as informações salvas no banco de dados pode-se verificar os ultimos dados enviados através de um query-param, ou retornar todos os dados registrados. Além disso, é possível verificar o número de vendas realizadas e os saldos finais tanto do produtor quanto do afiliado.
 
-## Running the app
+#### O que esse projeto possui
+ - [x] Dockerfile e DockerCompose
+ - [x] Documentação para Consumo da API
+ - [x] Testes Unitários
+ - [x] Componentes
+   - [x] API
+   - [x] Banco de dados
 
-```bash
-# development
-$ npm run start
+## O que esse projeto não faz e débitos técnicos
+#### O que esse projeto não faz
+- Não envia propriamente as notificações, apenas simula o envio agendado e registra no banco de dados para evidencia do funcionamento da rotina;
 
-# watch mode
-$ npm run start:dev
+#### Débitos técnicos
+- [ ] Remoção paramêtros *hard coded*, como portas das aplicações.
+- [ ] Estabelecer um intervalo mínimo entre o momento de criação da notificação e o agendamento dessa mesma notificação.
+- [ ] Teste do scheduller
 
-# production mode
-$ npm run start:prod
-```
+## Como executar o projeto
+### Criar Variáveis de Ambiente
+Criar um arquivo nomedo como `.env` na raiz do projeto contendo os seguintes valores.
+~~~bash
+POSTGRES_USER="postgres"
+POSTGRES_PASSWORD="postgres"
+POSTGRES_DB="hubladb"
+POSTGRES_HOST="db"
+~~~
+Notas: dada a natureza desse projeto há valores ***hard coded*** no código.
 
-## Test
+### Executar o projeto
+É possivel executar o projeto através do Makefile, a partir da linha de comando. Mas caso queira, abaixo segue como executar o docker manualmente, e depois rode make run-scheduler.
+~~~bash
+make run-project
+~~~
+Notas: o comando deve ser efetuado na pasta raiz do projeto
 
-```bash
-# unit tests
-$ npm run test
+### Executar o projeto
+Para executar o projeto, é necessário ter o `Docker Desktop` instalado. Com isso será possível criar as instancias usando o comando `docker compose` via IDE ou linha de comando conforme a seguir:
+~~~bash
+docker compose -f "docker-compose.yml" up -d --build
+~~~
+Notas: o comando deve ser efetuado na pasta raiz do projeto, dentro da pasta de backend
 
-# e2e tests
-$ npm run test:e2e
+### Utilizar Aplicação & Documentação API
+A documentação está disponível via Postman com os casos de consumo. É possivel rodar pelo link abaixo, ou copiando a coleção que esta dentro da pasta `docs`. É possivel verificar a documentação da API através do Swagger: http://localhost:8080/api.
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/13244098-10a3752d-4fe2-49f4-bf7d-2c397c24f7cd?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D13244098-10a3752d-4fe2-49f4-bf7d-2c397c24f7cd%26entityType%3Dcollection%26workspaceId%3D5e98eea6-1218-49b0-abb5-3b3c919df553)
