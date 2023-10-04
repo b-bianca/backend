@@ -4,6 +4,7 @@ import { UploadService } from './upload.service';
 import { UploadDTO } from './dto/upload.dto';
 import { UploadFile } from './entities/upload.entity';
 import {  ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Linter } from 'eslint';
 
 @ApiTags('Upload File')
 @Controller('upload')
@@ -32,7 +33,8 @@ export class UploadController {
   }
   
     private parseFileData(lines: string[]): UploadDTO[] {
-      return lines.map((line) => {
+      return lines.filter(line => line.trim() !== "")
+      .map((line) => {
         const type = line.substring(0, 1);
         const date = line.substring(1, 26);
         const product = line.substring(26, 56).trim();
@@ -62,5 +64,3 @@ export class UploadController {
       }
     }
   }
-
-
