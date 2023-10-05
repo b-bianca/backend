@@ -19,7 +19,9 @@ export class AffiliateController {
      for (const item of listTransactions) {
       if (item.type == '4') {
         balance += parseFloat(item.price.toString())
-      } 
+      } else if (item.type == '1' || item.type == '3'){
+        return `The ${seller} is an affiliate, not a productor`
+      }
      }
      console.log(balance)
 

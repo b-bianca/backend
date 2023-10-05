@@ -17,14 +17,17 @@ export class ProductorController {
      const listTransactions = await this.productorService.findRegisterByProducer(seller);
     console.log(listTransactions)
      let balance = 0
+     //let type4Found = false
 
      for (const item of listTransactions) {
-      if (item.type == '1' || item.type == '2') {
+      if (item.type == '4') {
+        return `The ${seller} is an affiliate, not a productor`
+      } else if (item.type == '1' || item.type == '2') {
         balance += parseFloat(item.price.toString())
         console.log(item.price, "price")
       } else if (item.type == '3') {
         balance -= parseFloat(item.price.toString())
-      }
+      } 
      }
      console.log(balance)
 
