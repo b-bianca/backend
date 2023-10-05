@@ -23,8 +23,6 @@ export class AffiliateController {
         return `The ${seller} is an affiliate, not a productor`
       }
      }
-     console.log(balance)
-
      return `The ${seller} affiliate's final balance is R$ ${balance.toFixed(2)}`
   }
 }
