@@ -36,9 +36,6 @@ Com as informações salvas no banco de dados pode-se verificar os ultimos dados
    - [x] Banco de dados
 
 ## O que esse projeto não faz e débitos técnicos
-#### O que esse projeto não faz
-- Não envia propriamente as notificações, apenas simula o envio agendado e registra no banco de dados para evidencia do funcionamento da rotina;
-
 #### Débitos técnicos
 - [ ] Remoção paramêtros *hard coded*, como portas das aplicações.
 - [ ] Teste end-to-end
