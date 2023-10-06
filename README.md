@@ -1,4 +1,4 @@
-# Hubla Challenge
+# Hubla Challenge Backend
 
 ## Sumário
 - [Sobre](#sobre)
@@ -8,8 +8,7 @@
 - [Como Executar o Projeto](#como-executar-o-projeto)
   - [Criar Variáveis de Ambiente](#criar-variáveis-de-ambiente)
   - [Executar o projeto](#como-executar-o-projeto)
-  - [Executar o Docker](#executar-o-docker)
-  - [Utilizar Aplicaçção & Documentação API](#utilizar-aplicação--documentação-api)
+  - [Utilizar Aplicação & Documentação API](#utilizar-aplicação--documentação-api)
 
 
 ## Sobre
@@ -20,7 +19,7 @@ banco de dados relacional.
 
 |Recurso|Versão|Obrigatório|Nota|
 |-|-|-|-|
-|Docker Desktop| 4.21 ou mais atual|Sim|Necessário para rodar containers das APIs e banco de dados|
+|Docker Desktop| 4.21 ou mais atual|Sim|Necessário para rodar containers da API e banco de dados|
 |Node| 18.18.0|Não|Necessário apenas no caso de rodar localmente sem container|
 
 ## O que esse projeto faz e possui
@@ -42,8 +41,7 @@ Com as informações salvas no banco de dados pode-se verificar os ultimos dados
 
 #### Débitos técnicos
 - [ ] Remoção paramêtros *hard coded*, como portas das aplicações.
-- [ ] Estabelecer um intervalo mínimo entre o momento de criação da notificação e o agendamento dessa mesma notificação.
-- [ ] Teste do scheduller
+- [ ] Teste end-to-end
 
 ## Como executar o projeto
 ### Criar Variáveis de Ambiente
@@ -57,18 +55,11 @@ POSTGRES_HOST="db"
 Notas: dada a natureza desse projeto há valores ***hard coded*** no código.
 
 ### Executar o projeto
-É possivel executar o projeto através do Makefile, a partir da linha de comando. Mas caso queira, abaixo segue como executar o docker manualmente, e depois rode make run-scheduler.
-~~~bash
-make run-project
-~~~
-Notas: o comando deve ser efetuado na pasta raiz do projeto
-
-### Executar o projeto
 Para executar o projeto, é necessário ter o `Docker Desktop` instalado. Com isso será possível criar as instancias usando o comando `docker compose` via IDE ou linha de comando conforme a seguir:
 ~~~bash
 docker compose -f "docker-compose.yml" up -d --build
 ~~~
-Notas: o comando deve ser efetuado na pasta raiz do projeto, dentro da pasta de backend
+Notas: o comando deve ser efetuado na pasta raiz do projeto, dentro da pasta backend
 
 ### Utilizar Aplicação & Documentação API
 A documentação está disponível via Postman com os casos de consumo. É possivel rodar pelo link abaixo, ou copiando a coleção que esta dentro da pasta `docs`. É possivel verificar a documentação da API através do Swagger: http://localhost:8080/api.
